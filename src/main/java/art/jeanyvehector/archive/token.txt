@@ -1,0 +1,6 @@
+
+git config --global user.name "Jean Yves Hector"
+git config --global user.email "jeanyveshector@gmail.com"
+
+
+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
