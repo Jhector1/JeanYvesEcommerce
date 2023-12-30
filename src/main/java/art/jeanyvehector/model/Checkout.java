@@ -16,14 +16,14 @@ public class Checkout implements Serializable {
     private Long id;
     private Date placedAt = new Date();
     @OneToOne(cascade = CascadeType.ALL)
-    @Column(length = 500)
+  //  @Column(length = 500)
     private Address billingAddress;
     @OneToMany(cascade = CascadeType.ALL)
-    @Column(length = 1000)
+  //  @Column(length = 1000)
 
     private List<MyProduct>artworks;
     @OneToOne(cascade = CascadeType.ALL)
-    @Column(length = 500)
+   // @Column(length = 500)
     private MyCustomer buyer;
 //    @NotEmpty(message = "Card holder name is required")
 //    public String ccName;
