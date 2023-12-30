@@ -1,0 +1,228 @@
+import {getAllElement, getElement} from "./helperMethod.js";
+
+class CookieManager {
+    static cookieBasket = localStorage;
+
+    constructor() {
+    }
+
+    static getCookieHeader() {
+        let basket = new Set();
+        for (let i = 0; i < this.cookieBasket.length; i++) {
+            basket.add(this.cookieBasket.key(i));
+        }
+        return basket;
+    }
+
+    static addCookie(header, cookie) {
+        this.cookieBasket.setItem(header, cookie);
+    }
+
+    static removeCookie(header) {
+        this.cookieBasket.removeItem(header);
+    }
+}
+
+class Cookie {
+    constructor(type, id) {
+        this.cookieType = type;
+        this.cookieID = id;
+    }
+
+    get id() {
+        return this.cookieID;
+    }
+
+    get type() {
+        return this.cookieType;
+    }
+}
+
+class CookieFactory {
+    constructor() {
+
+    }
+
+    cookieHead(cookie) {
+        return cookie.type + cookie.id;
+    }
+
+    createCookie(salt, ingredients) {
+        let new_cookie = salt + ",";
+        for (let u = 0; u < ingredients.length; u++) {
+            new_cookie += ingredients[u].innerHTML + ",";
+        }
+        return new_cookie;
+    }
+}
+
+class CookieClient {
+    constructor() {
+        this.allCookies = CookieManager.getCookieHeader();
+        this.clientBasket = new Set();
+    }
+
+
+    get clientBasketCookies() {
+        return this.clientBasket;
+    }
+
+    displayNumberLike(numAdd) {
+        let sumLike = this.clientBasketCookies.size;
+        if (sumLike >= 1) {
+            document.querySelector(numAdd).innerHTML = sumLike;
+        }
+    }
+
+    getCookieValue(value) {
+        return CookieManager.cookieBasket.getItem(value);
+    }
+
+
+    addToClientBasket(char_type) {
+        this.allCookies.forEach(value => {
+            if (value.trim().charAt(0) === char_type) {
+                this.clientBasket.add(value.trim());
+            }
+        });
+
+    }
+
+    displayArtwork(parent_element, list, common_op, identity) {
+        this.addToClientBasket(identity);
+        this.clientBasketCookies.forEach(value => {
+            getElement(".image-id").innerHTML=value.substring(1);
+
+            //if (value !== "") {
+            // console.log(this.clientBasketCookies);
+            const artwork_description = this.getCookieValue(value.trim()).split(',');
+            const clone = document.querySelector(`${parent_element} ${list}`);
+            const cloneNode = clone.cloneNode(true);
+            let count = 1;
+            cloneNode.querySelector(`${list} img`).src = artwork_description[0].trim();
+            //console.log(value.substring(1));
+            const common = cloneNode.querySelectorAll(common_op);
+            for (let y = 0; y < common.length; y++) {
+
+                common[y].innerHTML = artwork_description[count];
+                count++;
+            }
+            cloneNode.style.display = "flex";
+
+            document.querySelector(parent_element).appendChild(cloneNode);
+            // }
+        });
+
+    }
+}
+
+class ElementManager {
+    constructor(element1, element2, cookieClient) {
+        this.elementVisible = false;
+        this.element1 = element1;
+        this.element2 = element2;
+        this.cookieClient = cookieClient;
+        this.cookieFactory = new CookieFactory();
+    }
+
+    checkVisibilityOrDisplay(operation, element) {
+        operation === "display" ? element.style.display = "flex" : element.style.visibility = "visible";
+    }
+
+    displayElementStatus(imageUrl, operation, classNum) {
+        for (let value of this.cookieClient.clientBasketCookies.values()) {
+            // console.log(cookies_for_like2[k].split(",")[0].trim().substring(16) + "===" + img_url.src);
+            if (this.cookieClient.getCookieValue(value).split(",")[0].trim() === imageUrl) {
+                this.checkVisibilityOrDisplay(operation, this.element1);
+                //this.cookieClient.displayNumberLike(classNum);
+
+                this.elementVisible = true;
+                return 1;
+            }
+
+        }
+        this.checkVisibilityOrDisplay(operation, this.element2);
+
+        this.elementVisible = false;
+        //this.cookieClient.displayNumberLike(classNum);
+
+        return -1;
+    }
+
+    showElement(cookie, operation, classNum) {
+
+        if (operation === "display") {
+            this.element1.style.display = "none";
+            this.element2.style.display = "flex";
+
+        } else if (operation === "visibility") {
+            this.element1.style.visibility = "hidden";
+            this.element2.style.visibility = "visible";
+
+        }
+        this.elementVisible = false;
+        try {
+            CookieManager.removeCookie(this.cookieFactory.cookieHead(cookie));
+             //console.log(cookie);
+            getElement(classNum).innerHTML = Number(getElement(classNum).innerHTML) - 1;
+
+
+        } catch (err) {
+            alert("Sorry an internal error occurs, Please try again " + err);
+        }
+        //this.cookieClient.displayNumberLike(classNum);
+
+    }
+
+    notShowElement(imageUrl, allData, cookie, operation, classNum) {
+
+
+        if (operation === "display") {
+            this.element1.style.display = "flex";
+            this.element2.style.display = "none";
+
+        } else if (operation === "visibility") {
+            this.element1.style.visibility = "visible";
+            this.element2.style.visibility = "hidden";
+
+        }
+
+        this.elementVisible = true;
+        const cookieValue = this.cookieFactory.createCookie(imageUrl, allData);
+        const cookieHeader = this.cookieFactory.cookieHead(cookie);
+       // console.log(cookieHeader + " = " + cookieValue);
+        try {
+
+            CookieManager.addCookie(cookieHeader, cookieValue);
+            getElement(classNum).innerHTML = Number(getElement(classNum).innerHTML) + 1;
+
+        } catch (err) {
+            alert("Sorry an internal error occurs, Please try again " + err);
+        }
+       // this.cookieClient.displayNumberLike(classNum);
+
+    }
+
+    switchAppearance(imageUrl, allData, cookie, operation, classNum) {
+        this.displayElementStatus(imageUrl, operation, classNum);
+        if (this.elementVisible === true) {
+            this.element1.onclick = () => {
+                console.log(cookie);
+                this.showElement(cookie, operation, classNum);
+                this.element2.onclick = () => {
+                    this.notShowElement(imageUrl, allData, cookie, operation, classNum);
+                }
+            }
+        } else {
+            this.element2.onclick = () => {
+                this.notShowElement(imageUrl, allData, cookie, operation, classNum);
+                this.element1.onclick = () => {
+                    this.showElement(cookie, operation, classNum);
+
+                }
+            }
+        }
+    }
+}
+
+export {ElementManager, Cookie, CookieManager, CookieClient, CookieFactory};

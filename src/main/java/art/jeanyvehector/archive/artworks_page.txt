@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artworks | Hamoc-store</title>
+    <link rel="stylesheet" href="/style.css" type="text/css">
+    <script src="/js_file/header.js" type="module" defer></script>
+    <script src="/js_file/footer.js" type="module" defer></script>
+    <script src="/js_file/artwork_like.js" type="module" defer></script>
+    <!--    <script src="/js_file/artwork_header_tab.js" type="module" defer></script>-->
+
+</head>
+<body>
+<header-component></header-component>
+<artwork-header-tab></artwork-header-tab>
+
+<div class="artwork-details-info-popup">
+    <span style="position: absolute; right:10px; top: 10px;" id="slideshow-cancel-button">&#x2715;</span>
+
+    <div class="slideshow">
+        <i id="previous" class="fa-solid fa-chevron-left"></i>
+        <div class="parent-artwork-img">
+            <div class="popup-image-wrapper">
+                <img class="artwork-image" src="/images/download0.jpg" alt="artworks">
+
+                <div class="popup-like">
+                    <div class="popup-liked-heart heart-circle-liked-heart">
+                        <i class="liked-art fa-solid fa-heart"></i></div>
+                    <div class="popup-not-liked-heart heart-circle-not-liked-heart">
+                        <i class="liked-art fa-regular fa-heart"></i></div>
+                </div>
+            </div>
+        </div>
+        <i id="next" class="fa-solid fa-chevron-right"></i>
+    </div>
+    <div class="artwork-purchase-info">
+        <p class="artwork-description">description
+        </p>
+        <p class="popup-image-id" style="display:none;"></p>
+
+        <div class="description-and-cart">
+            <ul class="parent-popup-price-info">
+                <li class="display-common">Title</li>
+                <li class="display-common">Medium</li>
+                <li class="display-common">Size</li>
+                <li class="display-common">Price</li>
+            </ul>
+            <div class="parent-popup-cart-purchase">
+                <h1 class="popup-purchase">Purchase now</h1>
+                <div class="parent-popup-cart">
+                    <h1 class="popup-cart popup-cart-add-action">Add to Cart</h1>
+                    <h1 class="popup-cart popup-cart-remove-action">Remove from Cart</h1>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<article class="artworks-wrapper">
+    <div th:insert="~{artworkTemplate.html :: artworksTemplateData(field_artwork_category='Artworks')}" th:with="object=${artworks_images}"></div>
+
+    <div th:insert="~{artworkTemplate.html :: artworksTemplateData(field_artwork_category='woodworks')}" th:with="object=${woodworks}"></div>
+    <div class="" th:insert="~{artworkTemplate.html :: artworksTemplateData(field_artwork_category='Appliances')}" th:with="object=${appliances}"></div>
+
+    <!--    <div class="artworks-grandparent">-->
+<!--        <h1 class="artworks-category">painting</h1>-->
+<!--        <div class="artworks allArtParent">-->
+<!--            <div class="parent-previous2">-->
+<!--                <i class="previous2 fa-solid fa-chevron-left"></i>-->
+<!--            </div>-->
+<!--            <div class="frame" th:each="painting : ${artworks_images}">-->
+<!--                <p class="image-id" style="display:none;" th:text="${painting.getId()}"></p>-->
+<!--                <div class="image-wrapper"><img class="artwork-data-img" th:src="${painting.getImage_url()}"-->
+<!--                                                alt="title"/>-->
+<!--                </div>-->
+<!--                <div class="description">-->
+<!--                    <div class="sub-title">-->
+<!--                        <p style="word-break:break-all;" th:text="${painting.getTitle()}" class="titre artwork-data">-->
+<!--                            title</p>-->
+<!--                        <div>-->
+<!--                            <div class="liked-icon heart-circle-liked-heart"><i style="color: blue;" id="liked-heart"-->
+<!--                                                                                class="liked-art fa-solid fa-heart"></i>-->
+<!--                            </div>-->
+<!--                            <div class="not-liked-icon heart-circle-not-liked-heart"><i id="not-liked-heart"-->
+<!--                                                                                        class="liked-art fa-regular fa-heart"></i>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                    <div class="sub-title">-->
+<!--                        <div>-->
+<!--                            <h4 th:text="${painting.getMedium()}" class="medium artwork-data">Oil on-->
+<!--                                Canvas</h4>-->
+<!--                            <h4 th:text="${painting.getSize()}" class="size artwork-data">30x30inch</h4>-->
+<!--                            <h4 th:text="${painting.getPrice()}" class="price artwork-data">$1000</h4>-->
+<!--                            <h4 style="display: none" th:text="${painting.getDescription()}"-->
+<!--                                class="describe-artwork"></h4>-->
+<!--                        </div>-->
+<!--                        <div style="align-self: flex-end" class="touch-mode">-->
+<!--                            <div class="cart-icon cart-remove-box"><i style="color: cornflowerblue; font-size: 1.5rem"-->
+<!--                                                                      class="fa-sharp fa-solid fa-cart-plus"></i>-->
+<!--                            </div>-->
+<!--                            <div class="cart-icon cart-add-box"><i style="font-size: 1.5rem"-->
+<!--                                                                   class="fa-sharp fa-solid fa-cart-plus"></i></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="hover-mode">-->
+<!--                        <div class="cart-add cart-add-action">Add to Cart</div>-->
+<!--                        <div class="cart-remove cart-remove-action">Remove From Cart</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="parent-next2"><i class="next2 fa-solid fa-chevron-right"></i></div>-->
+
+<!--        </div>-->
+<!--        <div class="see-more">-->
+<!--            <div class="see-in-details-wrapper">-->
+<!--                <hr>-->
+<!--                <h1 class="see-in-details" href="#">See More</h1>-->
+<!--&lt;!&ndash;                <div class="touch-mode"><i style="font-size: 2rem;" class="see-in-details fa-solid fa-expand"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--                <hr>-->
+<!--            </div>-->
+<!--            <i id="down-id1" class="down fa-solid fa-chevron-down"></i>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="artworks-grandparent">-->
+<!--        <h1 class="artworks-category">Woodworks</h1>-->
+
+<!--        <div class="woodworks allArtParent">-->
+<!--            <div class="parent-previous2">-->
+<!--                <i class="previous2 fa-solid fa-chevron-left"></i>-->
+<!--            </div>-->
+<!--            <div class="frame" th:each="woodwork : ${woodworks}">-->
+
+<!--                <p class="image-id" style="display:none;" th:text="${woodwork.getId()}"></p>-->
+<!--                <div class="image-wrapper"><img class="artwork-data-img" th:src="${woodwork.getImage_url()}"-->
+<!--                                                alt="title"/>-->
+<!--                </div>-->
+<!--                <div class="description">-->
+<!--                    <div class="sub-title">-->
+<!--                        <p style="word-break:break-all;" th:text="${woodwork.getTitle()}" class="titre artwork-data">-->
+<!--                            title</p>-->
+<!--                        <div>-->
+<!--                            <div class="liked-icon heart-circle-liked-heart"><i style="color: blue;" id="liked-heart1"-->
+<!--                                                                                class="liked-art fa-solid fa-heart"></i>-->
+<!--                            </div>-->
+<!--                            <div class="not-liked-icon heart-circle-not-liked-heart"><i id="not-liked-heart1"-->
+<!--                                                                                        class="liked-art fa-regular fa-heart"></i>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                    <div class="sub-title">-->
+<!--                        <div>-->
+
+<!--                    <h4 th:text="${woodwork.getMedium()}" class="medium artwork-data">Oil on Canvas</h4>-->
+<!--                    <h4 th:text="${woodwork.getSize()}" class="size artwork-data">30x30inch</h4>-->
+<!--                    <h4 th:text="${woodwork.getPrice()}" class="price artwork-data">$1000</h4>-->
+<!--                    <h4 style="display: none" th:text="${woodwork.getDescription()}" class="describe-artwork"></h4>-->
+<!--                        </div>-->
+<!--                        <div style="align-self: flex-end" class="touch-mode">-->
+<!--                            <div class="cart-icon cart-remove-box"><i style="color: cornflowerblue; font-size: 1.5rem"-->
+<!--                                                                      class="fa-sharp fa-solid fa-cart-plus"></i>-->
+<!--                            </div>-->
+<!--                            <div class="cart-icon cart-add-box"><i style="font-size: 1.5rem"-->
+<!--                                                                   class="fa-sharp fa-solid fa-cart-plus"></i></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="hover-mode">-->
+<!--                        <div class="cart-add cart-add-action">Add to Cart</div>-->
+<!--                        <div class="cart-remove cart-remove-action">Remove From Cart</div>-->
+<!--                    </div>   </div>-->
+<!--            </div>-->
+<!--            <div class="parent-next2"><i class="next2 fa-solid fa-chevron-right"></i></div>-->
+
+<!--        </div>-->
+<!--        <div class="see-more">-->
+<!--            <div class="see-in-details-wrapper">-->
+<!--                <hr>-->
+<!--                <h1 class="see-in-details" href="#">See More</h1>-->
+<!--&lt;!&ndash;                <div class="touch-mode"><i style="font-size: 2rem;" class="see-in-details fa-solid fa-expand"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--                <hr>-->
+<!--            </div>-->
+<!--            <i id="down-id" class="down fa-solid fa-chevron-down"></i>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="artworks-grandparent last-row">-->
+<!--        <h1 class="artworks-category">Appliances</h1>-->
+
+<!--        <div class="appliances allArtParent">-->
+<!--            <div class="parent-previous2">-->
+<!--                <i class="previous2 fa-solid fa-chevron-left"></i>-->
+<!--            </div>-->
+<!--            <div class="frame" th:each="appliance : ${appliances}">-->
+
+<!--                <p class="image-id" style="display:none;" th:text="${appliance.getId()}"></p>-->
+<!--                <div class="image-wrapper"><img class="artwork-data-img" th:src="${appliance.getImage_url()}"-->
+<!--                                                alt="title"/>-->
+<!--                </div>-->
+<!--                <div class="description">-->
+<!--                    <div class="sub-title">-->
+<!--                        <p style="word-break:break-all;" th:text="${appliance.getTitle()}" class="titre artwork-data">-->
+<!--                            title</p>-->
+<!--                        <div>-->
+<!--                            <div class="liked-icon heart-circle-liked-heart"><i style="color: blue;"-->
+<!--                                                                                id="liked-heart2"-->
+<!--                                                                                class="liked-art fa-solid fa-heart"></i>-->
+<!--                            </div>-->
+<!--                            <div class="not-liked-icon heart-circle-not-liked-heart"><i id="not-liked-heart2"-->
+<!--                                                                                        class="liked-art fa-regular fa-heart"></i>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                    <div class="sub-title">-->
+<!--                        <div>-->
+<!--                    <h4 th:text="${appliance.getMedium()}" class="medium artwork-data">Oil on Canvas</h4>-->
+<!--                    <h4 th:text="${appliance.getSize()}" class="size artwork-data">30x30inch</h4>-->
+<!--                    <h4 th:text="${appliance.getPrice()}" class="price artwork-data">$1000</h4>-->
+<!--                    <h4 style="display: none" th:text="${appliance.getDescription()}" class="describe-artwork"></h4>-->
+<!--                        </div>-->
+<!--                        <div style="align-self: flex-end" class="touch-mode">-->
+<!--                            <div class="cart-icon cart-remove-box"><i style="color: cornflowerblue; font-size: 1.5rem"-->
+<!--                                                                      class="fa-sharp fa-solid fa-cart-plus"></i>-->
+<!--                            </div>-->
+<!--                            <div class="cart-icon cart-add-box"><i style="font-size: 1.5rem"-->
+<!--                                                                   class="fa-sharp fa-solid fa-cart-plus"></i></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="hover-mode">-->
+<!--                        <div class="cart-add cart-add-action">Add to Cart</div>-->
+<!--                        <div class="cart-remove cart-remove-action">Remove From Cart</div>-->
+<!--                    </div> </div>-->
+<!--            </div>-->
+<!--            <div class="parent-next2"><i class="next2 fa-solid fa-chevron-right"></i></div>-->
+
+<!--        </div>-->
+<!--        <div class="see-more">-->
+<!--            <div class="see-in-details-wrapper">-->
+<!--                <hr>-->
+<!--                <h1 class="see-in-details" href="#">See More</h1>-->
+<!--&lt;!&ndash;                <div class="touch-mode"><i style="font-size: 2rem;" class="see-in-details fa-solid fa-expand"></i></div>&ndash;&gt;-->
+<!--                <hr>-->
+<!--            </div>-->
+<!--            <i id="down-id2" class="down fa-solid fa-chevron-down"></i>-->
+<!--        </div>-->
+<!--    </div>-->
+</article>
+<footer-component></footer-component>
+</body>
+</html>
