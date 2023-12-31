@@ -73,6 +73,6 @@ public class MyCollectionController {
         }
 
 
-        return "/authenticated/my-collection";
+        return "authenticated/my-collection";
     }
 }
