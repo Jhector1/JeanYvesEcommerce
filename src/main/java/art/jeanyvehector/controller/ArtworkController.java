@@ -155,7 +155,7 @@ public class ArtworkController {
 
             WebPImageReaderSpi spi = new WebPImageReaderSpi();
             ImageReader reader = spi.createReaderInstance();
-            reader.setInput(ImageIO.createImageInputStream(new URI("https://jeanyveshector.com/"+artworkImageUrl).toURL().openStream()));
+            reader.setInput(ImageIO.createImageInputStream(new URI("https://jeanyveshector.com"+artworkImageUrl).toURL().openStream()));
             //URI imageUrl = new URI(artworkImageUrl);
             BufferedImage artworkImj = reader.read(0);
             double width = artworkImj.getWidth();
