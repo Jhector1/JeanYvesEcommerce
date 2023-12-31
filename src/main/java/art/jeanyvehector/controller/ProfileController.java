@@ -40,7 +40,6 @@ public class ProfileController {
         String mysession = a.getDetails().toString().split(",")[1];
         String sessionId = mysession.substring(11,mysession.length()-1 );
 
-        System.out.println(sessionId);
 
         model.addAttribute( "sessionId" ,sessionId);
 //        System.out.println("details: "+a.getDetails());
@@ -56,7 +55,7 @@ public class ProfileController {
 //        // Add the cookie to the response
 //        response.addCookie(myCookie);
 
-        return "/authenticated/userProfile";
+        return "authenticated/userProfile";
 
     }
     @ModelAttribute
