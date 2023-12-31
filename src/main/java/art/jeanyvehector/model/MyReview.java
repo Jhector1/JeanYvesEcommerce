@@ -25,7 +25,7 @@ public class MyReview implements Serializable {
     private int rating;
     private Date date = new Date();
     @Lob
-    @Column(length = 20000)
+    @Column(length = 200000)
     private byte[] imageData;
     private String imageName;
 }

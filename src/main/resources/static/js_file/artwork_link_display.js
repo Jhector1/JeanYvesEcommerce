@@ -223,7 +223,7 @@ function myData(rate, imageData = null, imageName = null) {
         // console.log(artworkID)
         const loader = document.querySelector(".loading");
         loader.classList.remove("loading-checkout");
-
+        getElement(".while-waiting").style.display="none";
         loader.classList.add("loader");
         fetch('/product/review/save', {
             method: 'POST',

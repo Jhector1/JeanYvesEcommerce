@@ -83,7 +83,7 @@ public class MyCustomer implements Serializable, MyUser {
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "myCustomer")
     private List<MyReview> myReviews;
     public MyCustomer() {
-       this("randomId");
+      // this("randomId");
     }
 
     @PrePersist
