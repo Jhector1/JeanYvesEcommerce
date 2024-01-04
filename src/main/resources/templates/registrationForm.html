@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
-        <link rel="stylesheet" href="/scss/stylesheet/style2.css" type="text/css">
+    <link rel="stylesheet" href="/scss/stylesheet/style2.css" type="text/css">
     <script src="/js_file/registration.js" type="module" defer></script>
     <!--    <script th:src="@{/js_file/header.js}" type="module" defer></script>-->
     <script th:src="@{/js_file/footer.js}" type="module" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--    <link rel="stylesheet" href="/stylesheet/style.css" type="text/css">-->
@@ -17,6 +19,47 @@
 
 <header th:replace="~{header.html :: header-component}"></header>
 
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Reset your password</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+
+            <!-- Modal body -->
+            <div  class="modal-body">
+                <div style="display: none" class="card card-success">
+                    <div class="card-body card-success-body">Basic card</div>
+                </div>
+                <div class="card-to-send"><p>Enter your email address and we'll send you a link to reset your password.</p>
+                    <h5>Your email address</h5>
+                    <form class="form-reset-email">
+                        <div class="form-floating mb-3 mt-3">
+
+                            <input type="text" class="form-control" id="email-reset" placeholder="Enter email"
+                                   name="email-reset">
+                            <label for="email-reset">Email</label>
+                        </div>
+                        <p class="reset-email-error"></p>
+                        <button type="submit" class="btn btn-reset btn-primary">Reset</button>
+                    </form
+                    >
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 <article th:fragment="sign-form" class="sign-up-in-body">
     <article class="sign-parent">
 
@@ -51,9 +94,9 @@
                                name="password" required>
 
                         <label for="password" class="form-label">Password:</label>
-<!--                        <span class="validationError"-->
-<!--                              th:if="${#fields.hasErrors('password')}"-->
-<!--                              th:errors="*{password}">CC Num Error</span>-->
+                        <!--                        <span class="validationError"-->
+                        <!--                              th:if="${#fields.hasErrors('password')}"-->
+                        <!--                              th:errors="*{password}">CC Num Error</span>-->
 
                         <div class="password-valid valid-feedback">Valid.</div>
                         <div class="password-invalid invalid-feedback">Invalid.</div>
@@ -70,7 +113,7 @@
                     <p>Password must be at least 8 characters
                         and include a lowercase letter, uppercase
                         letter, and digit.</p>
-                    <input  type="submit" value="Sign UP"
+                    <input href="#email" type="submit" value="Sign UP"
                            class="btn btn-secondary btn-lg signup-button"/>
 
                     <span>or</span>
@@ -93,7 +136,7 @@
                             class="fa-brands fa-apple"></i>Continue with Apple
                     </button>
                 </section>
-                <section><p>Already have an account? <span class="sign-in">Log in.</span></p>
+                <section><p>Already have an account? <span href="#" class="sign-in">Log in.</span></p>
                     <p>By clicking Sign Up or Continue with Apple,
                         Google, or Facebook, you agree to Jean Yves Art’s Terms of Use
                         and Privacy Policy and to receiving emails from Jean Yves Art.</p>
@@ -132,8 +175,14 @@
 
                     </div>
                     <!--                        <button type="submit" class="btn btn-primary">Submit</button>-->
-                    <p>Forgot Password?</p>
-                    <button type="submit" class="btn btn-secondary btn-lg ">
+                    <p></p>
+                    <div class="container mt-3">
+                        <p data-bs-toggle="modal" data-bs-target="#myModal">
+                            Forgot Password?
+                        </p>
+                    </div>
+
+                    <button type="submit"  class="btn btn-secondary btn-lg ">
                         Log In
                     </button>
 
@@ -156,7 +205,7 @@
             </div>
 
             <section>
-                <p>Don't have an account? <span class="sign-up">Sign up.</span></p>
+                <p>Don't have an account? <span href="#username" class="sign-up">Sign up.</span></p>
 
 
             </section>

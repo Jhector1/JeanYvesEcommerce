@@ -24,6 +24,8 @@ public class AssociateInventoryMetadata {
         for (int i = 0; i < elements.size(); i++) {
             mapImages.put(i, new InventoryMetadata());
         }
+        mapImages.put(2, new InventoryMetadata(0));
+
         mapImages.put(5, new InventoryMetadata(0));
         mapImages.put(6, new InventoryMetadata(images));
         mapImages.put(7, new InventoryMetadata(images));

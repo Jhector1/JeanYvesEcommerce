@@ -117,3 +117,42 @@ function validateAllInput() {
     return checkElementValidate(".email-registration", FormValidation.validateEmail) && checkElementValidate(".password-registration", FormValidation.validatePassword);
 
 }
+
+getElement(".form-reset-email").onsubmit = (event) => {
+    event.preventDefault();
+    const jsonRequest = new JsonRequest();
+    const email = getElement("#email-reset").value;
+
+
+        jsonRequest.post("/reset-password-email", {
+            emailTo: email,
+        })
+            .then(response => {
+                //console.log(response.json())
+                if (response.ok) {
+                    getElement(".card-success").style.display = "block";
+                    response.text().then(text => getElement(".card-success-body").innerHTML=text);
+
+
+                    getElement(".card-to-send").style.display = "none";
+
+                } // } else if (response.status === 409) {
+                //     // If the response status is 409 (Conflict), handle it
+                //     return response.json().then(data => {
+                //         throw new Error(`Conflict! Status: ${response.status}, Message: ${data.result}`);
+                //     });
+                // }
+                //
+                if (!response.ok) {
+                        return response.text().then(text => {
+                            throw new Error(`Reset email failed: ${response.status}, Message: ${text}`);
+                        })
+                }
+
+            }).catch(err => {
+                getElement(".reset-email-error").innerHTML=err;
+
+
+        });
+
+};

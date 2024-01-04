@@ -42,8 +42,8 @@ public List<String> enlightenmentDescriptions =
 
         enlightenmentSeries.add(
                 new Artwork(2, "/images/paintings/enlightenment/enlightenment2.webp",
-                        "My garden, my life, my peace", "1",
-                        "Oil and Acrylic on canvas", "36x36inch", enlightenmentDescriptions.get(2),0,new ArrayList<>()
+                        "My garden, my life, my peace", "Unavailable",
+                        "Oil and Acrylic on canvas", "36x36inch", enlightenmentDescriptions.get(2),1,new ArrayList<>()
                 ));
 
         enlightenmentSeries.add(

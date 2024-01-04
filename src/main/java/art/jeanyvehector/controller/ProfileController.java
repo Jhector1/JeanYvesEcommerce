@@ -1,5 +1,6 @@
 package art.jeanyvehector.controller;
 
+import art.jeanyvehector.helper.Helper;
 import art.jeanyvehector.model.MyCustomer;
 import art.jeanyvehector.repository.CustomerRepository;
 import jakarta.servlet.http.Cookie;
@@ -10,13 +11,12 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.UUID;
 
+@ControllerAdvice
 @Controller
 @RequestMapping("/account")
 @SessionAttributes({"sessionId"})
@@ -28,7 +28,7 @@ public class ProfileController {
     }
 
     @GetMapping("/{sessionId}/profile")
-    public String getProfilePage(Model model, HttpServletRequest request, HttpServletResponse response){
+    public String getProfilePage(Model model, HttpServletResponse response){
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication a = context.getAuthentication();
         Optional<MyCustomer> customer = customerRepository.findByEmail(a.getPrincipal().toString());
@@ -42,6 +42,8 @@ public class ProfileController {
 
 
         model.addAttribute( "sessionId" ,sessionId);
+        Helper.setCookieValue("session_Id", sessionId, response);
+
 //        System.out.println("details: "+a.getDetails());
 //        System.out.println("principal:  "+a.getPrincipal());
 //        Cookie myCookie = new Cookie("my-session-id", sessionId);
@@ -67,7 +69,7 @@ public class ProfileController {
         String mysession;
         String sessionId ;
         if(a==null){
-            sessionId ="sessionId1995";
+            sessionId = UUID.randomUUID().toString();
         }
         else {
             mysession = a.getDetails().toString().split(",")[1];

@@ -2,17 +2,14 @@ package art.jeanyvehector.service;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.Properties;
 
 @Service
@@ -39,7 +36,7 @@ public class EmailServiceImpl  {
     }
     
     public void sendMessageWithAttachment(
-            String to,String from, String subject, String text, String pathToAttachment) {
+            String to, String from, String subject, String text, String pathToAttachment) {
         // ...
 
         try {
@@ -53,10 +50,15 @@ public class EmailServiceImpl  {
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(text);
+            byte[] fileBytes = pathToAttachment.getBytes();
 
-            FileSystemResource file
-                    = new FileSystemResource(new File(pathToAttachment));
-            helper.addAttachment("invoice"+file.getFilename(), file);
+            // Convert the byte array to Base64 encoding
+//            byte[] fileBytes = Base64.getDecoder().decode(pathToAttachment);
+            String base64File = Base64.getEncoder().encodeToString(fileBytes);
+
+
+
+            helper.addAttachment("invoice"+pathToAttachment, new ByteArrayResource(Base64.getDecoder().decode(base64File)));
             Properties properties = new Properties();
             properties.setProperty("mail.smtp.auth", "true");
             properties.setProperty("mail.smtp.starttls.enable", "true");
@@ -71,3 +73,4 @@ public class EmailServiceImpl  {
 
     }
 }
+

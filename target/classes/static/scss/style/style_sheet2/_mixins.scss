@@ -210,4 +210,25 @@ cursor: pointer;
       }
     }
   }
+
+  @media only screen and (max-width: 800px) {
+
+
+    .message-contact {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      padding: 0 10%;
+    }
+
+    .quick-message-parent {
+      position: static;
+      width: 90%;
+      top: 0;
+      right: 0;
+      margin: 10% auto;
+    }
+  }
 }

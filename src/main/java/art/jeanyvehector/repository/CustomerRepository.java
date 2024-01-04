@@ -12,6 +12,6 @@ import java.util.Optional;
 @Repository
 public interface CustomerRepository extends CrudRepository<MyCustomer, String> {
     List<MyCustomer> findByExpirationDateBeforeAndFullName(Date expirationDate,  String fullName);
-
+Optional<MyCustomer>findByResetToken(String token);
     Optional<MyCustomer> findByEmail(String email);
 }

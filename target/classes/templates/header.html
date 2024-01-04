@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -36,11 +36,11 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li class="active-user">
-                        <li><a class="dropdown-item profile-nav" th:href="@{'/account/' + ${sessionId} + '/profile'}">My
+                        <li><a class="dropdown-item item1 profile-nav" th:href="@{'/account/' + ${sessionId} + '/profile'}">My
                             Information</a></li>
-                        <li><a class="dropdown-item" href="#">My Collection</a></li>
-                        <li><a class="dropdown-item active" href="#">Payment Settings</a></li>
-                        <li><a class="dropdown-item" href="#">My Reviews</a></li>
+                        <li><a class="dropdown-item item2" th:href="@{'/account/' + ${sessionId} + '/collections'}">My Collection</a></li>
+                        <li><a class="dropdown-item unavailable-link item3" >Payment Settings</a></li>
+                        <li><a class="dropdown-item unavailable-link item4" >My Reviews</a></li>
 
 
                         <li>
@@ -72,16 +72,42 @@
 
     </header>
     <div class="nav-link  header-menu" style="position:relative;">
-        <ul class="artwork-menu">
-            <li><a class="active-button" href="/artworks">Shop</a></li>
-            <li><a class="unavailable-link">Virtual Exhibition</a></li>
-            <li><a class="active-button" href="/about">About</a></li>
-            <li><a class="unavailable-link">My Story</a></li>
-            <li><a class="active-button" href="/contact">Contact</a></li>
-        </ul>
-        <li class="menu">Menu</li>
+
+        <div class="card">
+            <div id="collapseOne" class="collapse menu-to-show" data-bs-parent="#accordion">
+                <ul class="card-body artwork-menu">
+<!--                    <ul class="artwork-menu">-->
+                    <li><a class="active-button" href="/artworks">Shop</a></li>
+                    <li><a class="unavailable-link">Virtual Exhibition</a></li>
+                    <li><a class="active-button" href="/about">About</a></li>
+                    <li><a class="unavailable-link">My Story</a></li>
+                    <li><a class="active-button" href="/contact">Contact</a></li>
+<!--                </ul>-->
+                </ul>
+            </div>
+            <div class="card-header">
+                <a class="btn menu"  style="width: 100%; height: 100%" data-bs-toggle="collapse" href="#collapseOne">
+<!--                    <li class="menu">Menu</li>-->
+                    menu
+                </a>
+            </div>
+
+        </div>
+
+
 
     </div>
+<!--    <div class="nav-link  header-menu" style="position:relative;">-->
+<!--        <ul class="artwork-menu">-->
+<!--            <li><a class="active-button" href="/artworks">Shop</a></li>-->
+<!--            <li><a class="unavailable-link">Virtual Exhibition</a></li>-->
+<!--            <li><a class="active-button" href="/about">About</a></li>-->
+<!--            <li><a class="unavailable-link">My Story</a></li>-->
+<!--            <li><a class="active-button" href="/contact">Contact</a></li>-->
+<!--        </ul>-->
+<!--        <li class="menu">Menu</li>-->
+
+<!--    </div>-->
 </article>
 
 </body>

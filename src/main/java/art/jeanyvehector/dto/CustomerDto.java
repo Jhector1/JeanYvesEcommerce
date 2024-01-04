@@ -20,6 +20,6 @@ public class CustomerDto implements MyCurrentUser {
             "letter, uppercase letter, and digit.")
     private String password;
     private String matchingPassword;
-    @ValidEmail(message ="Email is Invalid")
+   // @ValidEmail(message ="Email is Invalid")
     private String email;
 }

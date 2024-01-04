@@ -14,20 +14,20 @@ const cookieNum = getAllElement(".image-id");
 const liked_heart = getAllElement(".liked-icon");
 const not_liked_heart = getAllElement(".not-liked-icon");
 
-const cart_add = getAllElement(".cart-add-action");
-const cart_remove = getAllElement(".cart-remove-action");
+// const cart_add = getAllElement(".cart-add-action");
+// const cart_remove = getAllElement(".cart-remove-action");
 const elementSold = getAllElement(".sold-item");
-
-const cart_icon_add = getAllElement(".cart-add-box");
-const cart_icon_remove = getAllElement(".cart-remove-box");
-
-const popup_cart_add = getElement(".popup-cart-add-action");
-const popup_cart_remove = getElement(".popup-cart-remove-action");
-const popup_liked_heart = getElement(".popup-liked-heart");
-const popup_not_liked_heart = getElement(".popup-not-liked-heart");
-const popup_element_sold = getElement(".popup-sold-item");
-const popup_purchase = getElement(".popup-purchase");
-const unique = getAllElement(".uniqueness");
+//
+// const cart_icon_add = getAllElement(".cart-add-box");
+// const cart_icon_remove = getAllElement(".cart-remove-box");
+//
+// const popup_cart_add = getElement(".popup-cart-add-action");
+// const popup_cart_remove = getElement(".popup-cart-remove-action");
+// const popup_liked_heart = getElement(".popup-liked-heart");
+// const popup_not_liked_heart = getElement(".popup-not-liked-heart");
+// const popup_element_sold = getElement(".popup-sold-item");
+// const popup_purchase = getElement(".popup-purchase");
+// const unique = getAllElement(".uniqueness");
 const artworkID = getAllElement(".image-id");
 for (let i = 0; i < all_frame.length; i++) {
     const all_artwork = all_frame[i].querySelectorAll(".artwork-data");

@@ -38,7 +38,7 @@
         display: none;
         flex-direction: column;
         justify-content: space-between;
-        width: 100%;
+        min-width: 6rem;
         overflow: auto;
 
         .artwork-in-detail-view {

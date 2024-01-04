@@ -54,6 +54,18 @@ public class MyCustomer implements Serializable, MyUser {
     @Expose
     @Setter
     @Getter
+    private String resetToken;
+    @Expose
+    @Setter
+    @Getter
+    private Date resetTokenDate;
+    @Expose
+    @Setter
+    @Getter
+    private boolean resetTokenUsed;
+    @Expose
+    @Setter
+    @Getter
     private Date expirationDate = new Date();
     @Expose
     @Setter

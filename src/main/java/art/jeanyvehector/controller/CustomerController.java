@@ -1,17 +1,12 @@
 package art.jeanyvehector.controller;
 
-import art.jeanyvehector.dto.CustomerDto;
-import art.jeanyvehector.exceptionHandler.UserAlreadyExistException;
 import art.jeanyvehector.model.*;
 import art.jeanyvehector.repository.*;
 import art.jeanyvehector.service.CustomerService;
-import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -24,10 +19,12 @@ public class CustomerController {
     private final CustomerRepository customerRepository;
 
 
-    protected CustomerController(CustomerRepository customerRepository, UserDetailsManager userDetailsManager, PasswordEncoder encoder, CustomerService customerService) {
+
+    protected CustomerController(CustomerRepository customerRepository, UserDetailsManager userDetailsManager, PasswordEncoder encoder, CustomerService customerService, PasswordEncoder passwordEncoder) {
         this.customerRepository = customerRepository;
 
     }
+
 
 
     @DeleteMapping("/{userId}")
@@ -41,7 +38,7 @@ public class CustomerController {
     }
 
 
-        // rest of the implementation
+    // rest of the implementation
 
 }
 //

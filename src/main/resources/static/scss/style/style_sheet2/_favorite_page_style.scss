@@ -51,6 +51,8 @@
             position: relative;
 
             .make-an-offer {
+              @include ellipsisText;
+
               cursor: pointer;
               background-color: $main-color;
               color: white;

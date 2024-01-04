@@ -1,4 +1,4 @@
-import {getElement} from "./helperMethod.js";
+import {getAllElement, getElement} from "./helperMethod.js";
 
 class Footer extends HTMLElement {
     constructor() {
@@ -81,6 +81,7 @@ class Footer extends HTMLElement {
     <link rel="stylesheet" href="/scss/stylesheet/style2.css" type="text/css">
 <!--   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.21.0/font/bootstrap-icons.css" rel="stylesheet">-->
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />   <title></title>
 <!--    <style>-->
     </head>
@@ -136,6 +137,7 @@ getElement(".menu").addEventListener('click', () => {
 
     }
 });
+
 getElement(".log-user-out").addEventListener('click', function() {
     // This function will be executed when the button is clicked
     sessionStorage.setItem("login-username", "anonymous");
@@ -152,4 +154,29 @@ else{
     getElement(".user-icon-box").style.display="block";
     getElement(".anonymous-user").style.display="none";
 
+}
+setUrl(".item1", "profile");
+setUrl(".item2", "collections");
+//setUrl(".item3", "payment-settings");
+//setUrl(".item4", "myReviews");
+
+function setUrl(selector, url_head){
+    getElement(selector).href = `/account/${getCookie("session_Id")}/${url_head}`;
+}
+window.addEventListener('resize',showMenuHorizontally);
+showMenuHorizontally();
+function showMenuHorizontally(){
+    // Get the width of the window
+    const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+// Get the height of the window
+    //  var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+    if(windowWidth>501 &&  windowWidth < 800){
+        getElement(".menu-to-show").classList.add("show");
+    }
+    else{
+        getElement(".menu-to-show").classList.remove("show");
+
+    }
 }
