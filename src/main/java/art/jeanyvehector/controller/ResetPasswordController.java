@@ -59,7 +59,7 @@ public class ResetPasswordController {
         MyCustomer myCustomer = myCustomerOptional.get();
         long dateRegister = myCustomer.getResetTokenDate().getTime();
         long expiredDate = new Date().getTime() - dateRegister;
-        if (expiredDate > 120000) {
+        if (expiredDate > 1800000) {
             myCustomer.setResetTokenUsed(true);
         }
         if (bindingResult.hasErrors()) {
